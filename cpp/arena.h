@@ -1,8 +1,7 @@
 #pragma once
 
-#include <stdint.h>
-#include <stdlib.h>
-#include <string.h>
+#include <cstdint>
+#include <cstdlib>
 
 // Default initial memory size (adjust for your project, e.g., 1MB for compilers)
 #define ARENA_DEFAULT_SIZE (1024 * 1024)
