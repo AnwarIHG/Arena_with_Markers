@@ -27,8 +27,6 @@ typedef struct Arena_t {
 } Arena_t;
 
 
-extern Arena_t *arena;
-
 // Utility to align upwards
 static inline size_t align_up(size_t n, size_t align) {
   return (n + align - 1) & ~(align - 1);

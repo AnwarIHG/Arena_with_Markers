@@ -1,7 +1,5 @@
 #include "arena.h"
 
-Arena_t *arena = {0};
-
 // Create and initialize the arena with a fixed size
 Arena_t* arena_create(size_t initial_size) {
     if (initial_size == 0) initial_size = ARENA_DEFAULT_SIZE;
