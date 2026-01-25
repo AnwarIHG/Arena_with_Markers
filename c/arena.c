@@ -1,5 +1,31 @@
 #include "arena.h"
 
+// Utility to align upwards
+static size_t align_up(size_t n, size_t align) {
+  return (n + align - 1) & ~(align - 1);
+}
+
+// Helper to get the last block in the chain
+static Arena_t* get_last_block(Arena_t* arena) {
+    Arena_t* cur = arena;
+    while (cur->next) {
+        cur = cur->next;
+    }
+    return cur;
+}
+
+// Helper to compute current global position (total allocated bytes)
+static size_t get_current_position(Arena_t* arena) {
+    size_t pos = 0;
+    Arena_t* cur = arena;
+    while (cur->next) {
+        pos += (size_t)(cur->end - cur->base);
+        cur = cur->next;
+    }
+    pos += (size_t)(cur->bump - cur->base);
+    return pos;
+}
+
 // Create and initialize the arena with a fixed size
 Arena_t* arena_create(size_t initial_size) {
     if (initial_size == 0) initial_size = ARENA_DEFAULT_SIZE;
